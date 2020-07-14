@@ -36,6 +36,15 @@ sap.ui.define(
             text: text,
           }),
 
+          beginButton: new Button({
+            text: "Cancel",
+            type: "Reject",
+            press() {
+              oDialog.close();
+              return;
+            },
+          }),
+
           endButton: new Button({
             text: "Confirm",
             type: "Accept",

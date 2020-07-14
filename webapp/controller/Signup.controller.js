@@ -20,7 +20,6 @@ sap.ui.define(["./Basecontroller"], function (Basecontroller) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (callback) callback(data);
         })
         .catch((err) => console.log(err));
@@ -29,8 +28,13 @@ sap.ui.define(["./Basecontroller"], function (Basecontroller) {
     // ACTIONS
     handleSignupUser() {
       const self = this;
-      self.onSignupUser(() =>
-        self._handleCreateMessageStrip("Successfully created user", "Success", "signup-form")
+      self._handleCreateConfirmationPopup(
+        "By signing up, you agree to be findable by one of \n your colleagues and have a good time @ 🍔 lunch. \n Continue?",
+        () => {
+          self.onSignupUser((data) =>
+            self._handleCreateMessageStrip(data.msg, "Success", "signup-form")
+          );
+        }
       );
     },
   });
