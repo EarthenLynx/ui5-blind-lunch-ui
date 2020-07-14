@@ -18,10 +18,10 @@
 						<Label text="My department" />
 					</HBox>
 
-					<Select width="18rem" enabled="true" id="type-input" forceSelection="false" selectedKey="{lunchUser>/department}" items="{path: 'lunchUser>/departmentPool'}">
+					<Select id="find-partner-select" width="18rem" enabled="true" forceSelection="false" selectedKey="{lunchUser>/department}" items="{path: 'lunchUser>/departmentPool'}">
 						<core:ListItem key="{lunchUser>value}" text="{lunchUser>value}" />
 					</Select>
-					<Button width="18rem" icon="sap-icon://visits" text="Find a colleague" press="handleGetLunchPartner" />
+					<Button id="find-partner-button" width="18rem" icon="sap-icon://visits" text="Find a colleague" press="handleGetLunchPartner" />
 				</VBox>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>

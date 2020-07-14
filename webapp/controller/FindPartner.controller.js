@@ -18,9 +18,7 @@ sap.ui.define(["./Basecontroller", "sap/ui/model/json/JSONModel"], function (
         .then((response) => response.json())
         .then((data) => {
           let oModel = new JSONModel(data);
-
           this.getView().setModel(oModel, "lunchUserMatch");
-          console.log(this.getView().getModel("lunchUserMatch"));
         });
     },
 
@@ -35,6 +33,8 @@ sap.ui.define(["./Basecontroller", "sap/ui/model/json/JSONModel"], function (
 
     handleGetLunchPartner() {
       this.getLunchPartner();
+      this.byId("find-partner-select").setEnabled(false);
+      this.byId("find-partner-button").setEnabled(false);
     },
   });
 });
