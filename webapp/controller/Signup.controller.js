@@ -1,41 +1,37 @@
 sap.ui.define(["./Basecontroller"], function (Basecontroller) {
   "use strict";
 
-  return Basecontroller.extend(
-    "sap.ui.etc.blindlunch.controller.Basecontroller",
-    {
-      // GETTERS
+  return Basecontroller.extend("sap.ui.etc.blindlunch.controller.Basecontroller", {
+    // GETTERS
 
-      // SETTERS
-      onSignupUser(callback) {
-        const payload = this.getView().getModel("lunchUser");
+    // SETTERS
+    onSignupUser(callback) {
+      const host = this._getHostname();
+      const payload = this.getView().getModel("lunchUser").getData();
 
-        console.log(payload);
+      console.log(payload);
 
-        // $.ajax({
-        //   url: "https://jsonplaceholder.typicode.com/todos/1",
-        //   data: payload,
-        //   type: "GET",
-        //   beforeSend: (request) => request.setRequestHeader(),
-        //   success: (result, status, xhr) => console.log(status),
-        //   error: (xhr, status, err) => console.log(err),
-        //   complete: (xhr, status) => console.log(status),
-        // });
+      fetch(host + "/signup", {
+        method: "post",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (callback) callback(data);
+        })
+        .catch((err) => console.log(err));
+    },
 
-        if (callback) callback();
-      },
-
-      // ACTIONS
-      handleSignupUser() {
-        const self = this;
-        self.onSignupUser(() =>
-          self._handleCreateMessageStrip(
-            "You've been successfully signed up!",
-            "Success",
-            "signup-form"
-          )
-        );
-      },
-    }
-  );
+    // ACTIONS
+    handleSignupUser() {
+      const self = this;
+      self.onSignupUser(() =>
+        self._handleCreateMessageStrip("Successfully created user", "Success", "signup-form")
+      );
+    },
+  });
 });

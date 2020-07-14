@@ -12,6 +12,10 @@ sap.ui.define(
     return Controller.extend("sap.ui.etc.blindlunch.controller.App", {
       onInit: function () {},
 
+      _getHostname() {
+        return "http://localhost:3000";
+      },
+
       _handleCreateMessageStrip(text, type, oId) {
         const oItem = this.getView().byId(oId);
         const oMsgStrip = new MessageStrip({
