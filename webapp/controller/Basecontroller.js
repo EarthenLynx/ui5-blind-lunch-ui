@@ -12,8 +12,12 @@ sap.ui.define(
     return Controller.extend("sap.ui.etc.blindlunch.controller.App", {
       onInit: function () {},
 
-      _getHostname() {
-        return "http://localhost:3000";
+      _getHostname(dev) {
+        if (dev) {
+          return "http://localhost:3000";
+        } else {
+          return "http://localhost:3000";
+        }
       },
 
       _handleCreateMessageStrip(text, type, oId) {
